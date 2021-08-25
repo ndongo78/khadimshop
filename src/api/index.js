@@ -1,5 +1,5 @@
 import axios from 'axios'
-onst url='https://backendkashop.herokuapp.com/'
+const url='https://backendkashop.herokuapp.com/'
 //cconst url='http://localhost:3001/'
 //users
 export const postUser=user=>axios.post(url+'users/register',user)
