@@ -46,7 +46,9 @@ const Products = (props) => {
     return (
          <>
          <Typography variant='h3' align='center' gutterBottom color='primary' className={classes.titre}>Nos Nouveaux Produits</Typography>
-        <Carousel 
+        {
+          articles.length && 
+          <Carousel 
          swipeable={false}
          draggable={false}
          showDots={false}
@@ -65,11 +67,13 @@ const Products = (props) => {
          itemClass="carousel-item-padding-40-px"
         >
             {
+               articles.length === 0 ?  "wait":
                 articles.map((item,i)=>(
                     <Grid className={classes.containerProduct} key={i}>
                         <Grid item sm={12} xs={12} style={{display: 'flex',
                         flexDirection:'column',alignItems:'center',margin: 10,
                         }}>
+                          
                             <img src={item.image}  alt=""  />
                             <Typography variant='h5' align='center' className={classes.productTitle}  > {item.title} </Typography>
                             <Typography variant='h5' align='center' >  <Rating name="read-only" value={item.avis} precision={0.5} readOnly /> </Typography>
@@ -101,6 +105,8 @@ const Products = (props) => {
             }
         
         </Carousel>
+        }
+        
         </>
     )
 }

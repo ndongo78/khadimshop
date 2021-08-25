@@ -3,7 +3,7 @@ export default (NewArticles=[],action)=>{
         case "CREATE_ARTICLE_S":
              return [...NewArticles,action.payload]
             case 'GET_NEW_ARTICLES':
-        return action.payload;
+        return [action.payload];
         
         default:
             return NewArticles;

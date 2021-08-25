@@ -123,7 +123,7 @@ const ProfilAdmin=()=> {
                               articles.map((item,i)=>(
                                   <TableRow key={i} >
                                       <TableCell style={{textAlign:'center'}}> <img src={item.image} alt="" width={50} /> </TableCell>
-                                      <TableCell align='right' style={{textAlign:'center'}}> {item.category.name} </TableCell>
+                                      <TableCell align='right' style={{textAlign:'center'}}> {item.categoryId} </TableCell>
                                       <TableCell align='right' style={{textAlign:'center'}}> {item.title} </TableCell>
                                       <TableCell align='right' style={{width:300,textAlign:'center'}}> {item.description} </TableCell>
                                       <TableCell align='right' style={{textAlign:'center'}} > {item.price} </TableCell>
