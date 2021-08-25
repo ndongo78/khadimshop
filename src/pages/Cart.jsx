@@ -53,7 +53,10 @@ const Cart = () => {
                 <Box  className={classes.recap}>
                  <Paper className={classes.recapBt}>
                     <Typography variant='h4'  style={{color:'blueviolet'}} >Total commande: {total} CFA </Typography>  
-                    <Button className={classes.btn} onClick={handleRedirect} > Payer ma commande </Button> 
+                    {
+                        user.length !==0 ? <Button className={classes.btn} onClick={handleRedirect} > Payer ma commande </Button> : null 
+                    }
+                    
                  </Paper>
                 
                 </Box>
