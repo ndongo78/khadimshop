@@ -1,4 +1,4 @@
-export default (state={articles:[],cart:[],total:0},action)=>{
+export default (state={articles:[],cart:[],newArticles:[],total:0},action)=>{
      switch (action.type) {
          
          case "CREATE_ARTICLE":
@@ -30,7 +30,7 @@ export default (state={articles:[],cart:[],total:0},action)=>{
             case 'GET_NEW_ARTICLES':
                 return{
                     ...state,
-                    articles:[...action.payload]
+                    newArticles:[...action.payload]
                 }
               
                case "DELETE_ARTICLE":

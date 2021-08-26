@@ -3,6 +3,7 @@ import Rating from '@material-ui/lab/Rating';
 import { FavoriteBorderOutlined, Sync, VisibilityOutlined,ShoppingCartOutlined } from '@material-ui/icons'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import loading from '../images/load.gif'
 import React,{useEffect} from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { getNewArticle } from '../redux/actions/ActionArticle'
@@ -32,7 +33,7 @@ const responsive = {
   
 
 const Products = (props) => {
-    const {articles}=useSelector(state=>state.article)
+    const {newArticles}=useSelector(state=>state.article)
     const dispatch=useDispatch()
     const classes=useStyles()
     const [open] = React.useState(false);
@@ -47,7 +48,7 @@ const Products = (props) => {
          <>
          <Typography variant='h3' align='center' gutterBottom color='primary' className={classes.titre}>Nos Nouveaux Produits</Typography>
         {
-          articles.length && 
+          newArticles.length && 
           <Carousel 
          swipeable={false}
          draggable={false}
@@ -67,8 +68,10 @@ const Products = (props) => {
          itemClass="carousel-item-padding-40-px"
         >
             {
-               articles.length === 0 ?  "wait":
-                articles.map((item,i)=>(
+               newArticles.length === 0 ? <Box> 
+                 <img src={loading} width={1500} alt="" />
+                </Box> :
+               newArticles.map((item,i)=>(
                     <Grid className={classes.containerProduct} key={i}>
                         <Grid item sm={12} xs={12} style={{display: 'flex',
                         flexDirection:'column',alignItems:'center',margin: 10,
