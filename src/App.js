@@ -18,10 +18,15 @@ import Payement from './user/Payement';
 import ModifierInfo from './user/ModifierInfo';
 import Commandes from './pages/Commandes';
 import Remboursement from './user/Remboursement';
+import ResetPassword from './user/ResetPassword';
+import Recupe from './user/Recupe'
+import { CssBaseline } from '@material-ui/core';
+import Contact from './contact/Contact';
 
 const App=()=> {
   return (
     <>
+    <CssBaseline />
     <Router>
      <Header />
      <Switch>
@@ -40,6 +45,9 @@ const App=()=> {
        <Route path='/userInfo' component={ModifierInfo} />
        <Route path='/commandes' component={Commandes} />
        <Route path='/remboursement' component={Remboursement} />
+       <Route path='/resetPassword' component={ResetPassword} />
+       <Route path='/changerPassword/:token/:id' component={Recupe} />
+       <Route path='/contact' component={Contact} />
      </Switch> 
      <Footer />
      </Router>

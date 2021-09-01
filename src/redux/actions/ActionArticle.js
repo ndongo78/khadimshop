@@ -117,3 +117,15 @@ export const getArticleFor=()=>async(dispatch)=>{
         
     }
 }
+
+export const getElementId=(id)=>async(dispatch)=>{
+    try {
+        const {data} =await api.getElement(id)
+        dispatch({
+            type:"GET_ELEMENT",
+            payload:data
+        })
+    } catch (error) {
+        
+    }
+}

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid,IconButton, Box, InputAdornment , Typography,   } from '@material-ui/core'
-import { Search  } from '@material-ui/icons'
 import  { useStyles } from '../Styles/NewLetterStyle'
 import TextInput from '../components/TextInput'
 import { Form, Formik } from 'formik'
@@ -30,8 +29,8 @@ const NewLetter = () => {
                     InputProps={{
                     endAdornment: (
                             <InputAdornment position="end">
-                            <IconButton >
-                            <Search />  
+                            <IconButton className={classes.btn}>
+                            S'abonner
                             </IconButton>
                             
                             </InputAdornment>

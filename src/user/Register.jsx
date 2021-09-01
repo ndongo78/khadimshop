@@ -25,7 +25,7 @@ function Register() {
         prenom: Yup.string().required('Required'),
         email: Yup.string().required('Required').email('invalid email'),
         password: Yup.string().required('Required').min(8, "Le mot de pass require min 8 charactéres"),
-        confirm_password: Yup.string().required("Required"),
+        confirm_password: Yup.string().required("Required").oneOf([Yup.ref('password'),"Mot de pass ne corresponde pas"]),
         telephone:Yup.number().required("Required"),
         addresse:Yup.string().required('Required'),
         pays:Yup.string().required('Required')

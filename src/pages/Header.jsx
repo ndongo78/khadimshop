@@ -64,7 +64,7 @@ const Header=()=> {
                          />
                      </div>
                      <div className={classes.linkContainer}>
-                        <Link to='/' className={classes.linkContainer}>Home</Link> 
+                        <Link to='/' className={classes.linkContainer}>Accueil</Link> 
                        <Link to='/product' className={classes.linkContainer}>Produits</Link>
                        <Link to='/contact' className={classes.linkContainer}>Contact</Link>
                      </div>

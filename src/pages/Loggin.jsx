@@ -11,7 +11,7 @@ import { loginUser } from '../redux/actions/ActionUser';
 import { LockOutlined,Visibility,VisibilityOff } from '@material-ui/icons';
 
 const Loggin=()=> {
-     const {role}=useSelector(state=>state.user)
+     const {role,logginError}=useSelector(state=>state.user)
      const [showPassword, setshowPassword] = useState(false)
      const dispatch=useDispatch()
       const classes=useStyles()
@@ -20,7 +20,7 @@ const Loggin=()=> {
      const handleSubmit=(values)=>{
       dispatch( loginUser(values))
      }
-  
+   
   
     const validationSchema=Yup.object({
         email: Yup.string().required('Required').email('invalid email'),
@@ -40,7 +40,7 @@ const Loggin=()=> {
             <Grid item className={classes.container} sm={12} xs={12} >
               <Container maxWidth='xs'className={classes.midle}>
                <div className={classes.contain}>
-                <Avatar className={classes.avatar}>
+              <Avatar className={classes.avatar}>
                 <LockOutlined />
               </Avatar>
               <Typography variant='h6' className={classes.top} color='primary'>Se connecter</Typography>
@@ -56,6 +56,7 @@ const Loggin=()=> {
                   {
                     ({handleChange,setFieldTouched,values})=>(
                       <Form noValidate autoComplete='off' className={classes.root} >
+                        <Typography variant='body1' align='center' color='secondary'> {logginError} </Typography>
                        <div>
                      <TextInput 
                       name='email'
@@ -107,7 +108,7 @@ const Loggin=()=> {
                 
 
                 }}>
-                  <Link to='/reset'>Mot de pass oublié</Link>
+                  <Link to='/resetPassword'>Mot de pass oublié</Link>
                   <Link to='/register'>Pas encore inscrit ? S'inscrire </Link>
                 </Grid>
                </Container>

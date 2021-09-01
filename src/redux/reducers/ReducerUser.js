@@ -48,6 +48,17 @@ export default (state=initialState,action)=>{
                         ...state,
                         user:[action.payload]
                     }
+                    case "RESET_PASSWORD":
+                        return{
+                            ...state,
+                            registerSuccess: action.payload
+                        }
+                        case "NEW_PASSWORD":
+                            return{
+                                ...state,
+                                registerSuccess: action.payload
+                            }
+             
          
         default:
             return state;

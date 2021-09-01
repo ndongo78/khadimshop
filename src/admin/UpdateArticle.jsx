@@ -2,9 +2,10 @@ import React,{ useEffect } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { getCategorie } from '../redux/actions/ActionCategorie'
 import { Grid, Typography,Button,Container, MenuItem, TextField, Paper } from '@material-ui/core'
-import { updateArticle } from '../redux/actions/ActionArticle'
+import { updateArticle,getElementId } from '../redux/actions/ActionArticle'
 import { Form, Formik} from 'formik'
 import * as Yup from "yup"
+import { useParams } from 'react-router'
 import TextInput from '../components/TextInput'
 import {useStyles} from '../articles/styles/ArticleStyle'
 import SelectInput from '../components/SelectInput'
@@ -16,17 +17,21 @@ import {useHistory} from 'react-router-dom'
 
 const UpdateArticle = (props) => {
   const categories=useSelector(state=>state.categorie)
-  const {article}=useSelector(state=>state.article)
+  const {articles,updatedArticle}=useSelector(state=>state.article)
    const dispatch=useDispatch()
     const classes=useStyles()
     let history=useHistory()
- 
+    const {id}=useParams()
+
+
   useEffect(() => {
      dispatch(getCategorie())
     // setnewArticle(article.find(item=> item.id ==props.match.params.id))
+    dispatch(getElementId(props.match.params.id))
   }, [dispatch])
  
 
+ ///console.log(articles.find(item=> item.id ===props.match.params.id));
 
   const validationSchema=Yup.object({
     categoryId: Yup.number().required('Required'),
@@ -37,7 +42,9 @@ const UpdateArticle = (props) => {
     return (
         <Grid>
             <Grid container>
-            
+            {
+            console.log(articles.find(item=>item.id ==id))
+            }
             <Grid item className={classes.container} >
               <Button startIcon={<ArrowBack style={{fontSize: '30px',
               }}  />} size='medium' onClick={()=>history.push('/admin')} color='inherit' className={classes.retourIcon}  > Retour Profil </Button> 
@@ -45,14 +52,15 @@ const UpdateArticle = (props) => {
            
                <Formik 
                   initialValues={
-                    article ?
+                    articles ?
                  {
-                   categoryId:article.find(item=> item.id ===props.match.params.id).categoryId,
-                  title:article.find(item=> item.id ===props.match.params.id).title,
-                  description:article.find(item=> item.id ===props.match.params.id).description,
-                  price:article.find(item=> item.id ===props.match.params.id).price,
-                  image: article.find(item=> item.id ===props.match.params.id).image,
-                  avis:article.find(item=> item.id ===props.match.params.id).avis}
+                   categoryId:articles.find(item=>item.id ==id).categoryId,
+                  title:articles.find(item=>item.id ==id).title,
+                  description:articles.find(item=>item.id ==id).description,
+                  price:articles.find(item=>item.id ==id).price,
+                  image:articles.find(item=>item.id ==id).image,
+                  avis:articles.find(item=>item.id ==id).avis
+                }
                   : 
                   {
                     categoryId:'',
@@ -85,7 +93,7 @@ const UpdateArticle = (props) => {
                 <Form noValidate autoComplete='off' className={classes.root}>
                 {
                   
-                   article.map(item=><Typography key={item.id} variant='h5' style={{color:'#91ff35',fontStyle:'italic'}} align='center'> {item.message} </Typography>)
+                   articles.map(item=><Typography key={item.id} variant='h5' style={{color:'#91ff35',fontStyle:'italic'}} align='center'> {item.message} </Typography>)
                }
               <Typography style={{marginLeft: 10, fontStyle:'italic',opacity:'.5'}}>Sélectionner la Catégorie de l'article</Typography> 
               <SelectInput

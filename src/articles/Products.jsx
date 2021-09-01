@@ -37,7 +37,8 @@ const Products = (props) => {
     const dispatch=useDispatch()
     const classes=useStyles()
     const [open] = React.useState(false);
-    
+
+
   useEffect(() => {
      dispatch(getNewArticle())
   }, [dispatch])
@@ -68,7 +69,7 @@ const Products = (props) => {
          itemClass="carousel-item-padding-40-px"
         >
             {
-               newArticles.length === 0 ? <Box> 
+               newArticles.length==0 ? <Box> 
                  <img src={loading} width={1500} alt="" />
                 </Box> :
                newArticles.map((item,i)=>(

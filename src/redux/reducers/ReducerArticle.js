@@ -1,4 +1,4 @@
-export default (state={articles:[],cart:[],newArticles:[],total:0},action)=>{
+export default (state={articles:[],cart:[],newArticles:[],updatedArticle:[], total:0},action)=>{
      switch (action.type) {
          
          case "CREATE_ARTICLE":
@@ -32,6 +32,11 @@ export default (state={articles:[],cart:[],newArticles:[],total:0},action)=>{
                     ...state,
                     newArticles:[...action.payload]
                 }
+                case "GET_ELEMENT":
+                    return{
+                        state,
+                        updatedArticle:[...action.payload]
+                    }
               
                case "DELETE_ARTICLE":
                    const item= state.articles.find(item=>item.id === action.payload)

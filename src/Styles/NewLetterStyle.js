@@ -36,5 +36,10 @@ export const useStyles = makeStyles((theme) => ({
     buton:{
         marginTop: 50,
         height: 55
+    },
+    bnt:{
+      '&:hover':{
+        backgroundColor:'red'
+      }
     }
   }));

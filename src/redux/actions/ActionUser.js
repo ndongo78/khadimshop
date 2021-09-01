@@ -32,27 +32,28 @@ export const loginUser=(values)=>async(dispatch)=>{
             payload:response.data.user
             })  
         }
-
-       if(response.data.user.role === 'admin'){
+        if(response.data.user){
+             if(response.data.user.role === 'admin'){
              dispatch({
                type: 'LOGIN_ADMIN',
                payload:response.data.user.role
            })
-       }
-       if(response.data.user.role === 'client'){
-        dispatch({
-          type: 'LOGIN_ADMIN',
-          payload:response.data.user.role
-      })
-  }
-       if(response.data.error){
+            }
+            if(response.data.user.role === 'client'){
+                dispatch({
+                type: 'LOGIN_ADMIN',
+                payload:response.data.user.role
+            })
+        }
+        }else{
+        if(response.data.error){
            dispatch({
                type:"LOGIN_ERROR",
                payload:response.data.error
            })
-       }
+       } 
+        }
       
-       
     } catch (error) {
         console.log(error)
     }
@@ -73,4 +74,28 @@ export const updateUser=(id,values)=>async(dispatch)=>{
      } catch (error) {
          console.log(error)
      }
+}
+
+export const resetPassword=({email})=>async(dispatch)=>{
+    try {
+         const {data}=await api.resetPass({email}) 
+         dispatch({
+             type:"RESET_PASSWORD",
+             payload: data
+         })
+    } catch (error) {
+         console.log(error)
+    }
+}
+
+export const changerPassword=(value,token)=>async(dispatch)=>{
+    try {
+        const {data}=await api.changePassword(value,token)
+        dispatch({
+            type: "NEW_PASSWORD",
+            payload: data
+        })
+    } catch (error) {
+         console.log(error)
+    }
 }
