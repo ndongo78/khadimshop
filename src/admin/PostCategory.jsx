@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux'
 
 const PostCategory = () => {
   const categorie=useSelector(state=>state.categorie)
+  const {token}=useSelector(state=>state.user)
     const classes=useStyles()
     const [error] = useState()
     const dispatch=useDispatch()
@@ -24,8 +25,8 @@ const PostCategory = () => {
       })
 
      const handleSubmit=(values,{resetForm})=>{
-          dispatch(postCategory(values))
-          resetForm({})
+          dispatch(postCategory(values,token))
+          // resetForm({})
      }
 
 

@@ -26,8 +26,10 @@ export const useStyles=makeStyles((theme)=>({
          fontStyle: 'italic',
          marginBottom: 30,
         "@media only screen and (max-width : 480px)":{
-          fontSize: 26
-        }
+          fontSize: 20,
+          textAlign: 'center'
+        },
+        textAlign:'center'
       },
     container:{
         display: 'block',

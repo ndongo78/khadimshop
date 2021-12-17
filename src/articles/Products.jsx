@@ -3,13 +3,13 @@ import Rating from '@material-ui/lab/Rating';
 import { FavoriteBorderOutlined, Sync, VisibilityOutlined,ShoppingCartOutlined } from '@material-ui/icons'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import loading from '../images/load.gif'
 import React,{useEffect} from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { getNewArticle } from '../redux/actions/ActionArticle'
 import { useStyles } from '../Styles/ProduitStyle'
 import { addToCart } from '../redux/actions/ActionCart';
-
+import { useHistory } from 'react-router-dom'
+import HandleLoading from '../components/Loading';
 
 const responsive = {
     desktop: {
@@ -37,6 +37,7 @@ const Products = (props) => {
     const dispatch=useDispatch()
     const classes=useStyles()
     const [open] = React.useState(false);
+    const history=useHistory()
 
 
   useEffect(() => {
@@ -69,9 +70,9 @@ const Products = (props) => {
          itemClass="carousel-item-padding-40-px"
         >
             {
-               newArticles.length==0 ? <Box> 
-                 <img src={loading} width={1500} alt="" />
-                </Box> :
+               newArticles.length===0 ? 
+                HandleLoading()
+                :
                newArticles.map((item,i)=>(
                     <Grid className={classes.containerProduct} key={i}>
                         <Grid item sm={12} xs={12} style={{display: 'flex',
@@ -87,7 +88,7 @@ const Products = (props) => {
                                 }
                                 <Grid className={classes.iconButton}>
                                 <Tooltip title="Voir Détail" aria-label="Voir Détail" > 
-                                <IconButton style={{padding:15}} onClick={()=>alert(item.id)} > <VisibilityOutlined style={{fontSize:30}} /> </IconButton>
+                                <IconButton style={{padding:15}} onClick={()=>history.push(`/details/${item.id}`)} > <VisibilityOutlined style={{fontSize:30}} /> </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
                                 <IconButton color='secondary' style={{padding:15}}> <FavoriteBorderOutlined style={{fontSize:30}} /> </IconButton>

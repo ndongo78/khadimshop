@@ -15,14 +15,14 @@ export const getCategorie=()=>async(dispatch)=>{
     }
 }
 //action post
-export const postCategory=(values)=>async(dispatch)=>{
+export const postCategory=(values,token)=>async(dispatch)=>{
        try {
-           const {data}=await api.postCategory(values)
+           const response=await api.postCategory(values,token)
            dispatch({
                type:"POST_CATEGORIE",
-               payload:data
+               payload:response.data
            })
        } catch (error) {
-           console.log(error)
+           console.log(error.response.errors)
        }
 }

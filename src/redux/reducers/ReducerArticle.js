@@ -1,4 +1,4 @@
-export default (state={articles:[],cart:[],newArticles:[],updatedArticle:[], total:0},action)=>{
+export default (state={articles:[],cart:[],newArticles:[],updatedArticle:[], total:0,detail:[],success:null},action)=>{
      switch (action.type) {
          
          case "CREATE_ARTICLE":
@@ -17,6 +17,12 @@ export default (state={articles:[],cart:[],newArticles:[],updatedArticle:[], tot
                ...state,
                articles:[...action.payload]
            } 
+      case 'GET_ARTICLE_BY_ID':
+            return{
+                ...state,
+                detail:[action.payload]
+            }
+
        case 'GET_POPULAR_ARTICLES':
         return{
             ...state,
@@ -48,23 +54,25 @@ export default (state={articles:[],cart:[],newArticles:[],updatedArticle:[], tot
                        }
                    }
                    break;
-                  case "UPDATE_ARTICLE":
-                return state.articles.filter(item=>item.id === action.payload)
-               
+                    case "UPDATE_ARTICLE":
+                    const items= state.articles.find(item=>item.id === action.payload)
+                    if(items){
+                        return {
+                            ...state,
+                            articles:items
+                        }
+                    }
+                
                 //cart
                 case "ADD_TO_CART":
-                    // return{
-                    //     ...state,
-                    //     cart: [...state,action.payload],
-                    // }
                     let addedItem=state.articles.find(item=>item.id === action.payload)
 
                     let isExist=state.cart.find(item=>item.id === action.payload)
                     if(isExist){
+                        addedItem.qty +=1
                         return {
                             ...state,
-                             cart:[...state.cart,addedItem],
-                            error: 'Article existe deja dans le panier',
+                             cart:[...state.cart.filter(item=>item.id !== action.payload),addedItem],
                             total: state.total + addedItem.price
                         }
                     }else{

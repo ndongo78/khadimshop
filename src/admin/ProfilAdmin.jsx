@@ -11,7 +11,7 @@ import {useDispatch,useSelector} from 'react-redux'
 import { logOut } from '../redux/actions/ActionUser';
 
 const ProfilAdmin=()=> {
-    const {user}=useSelector(state=>state.user)
+    const {user,token}=useSelector(state=>state.user)
     const {articles}=useSelector(state=>state.article)
     const dispatch=useDispatch()
     const classes=useStyles()
@@ -129,7 +129,7 @@ const ProfilAdmin=()=> {
                                       <TableCell align='right' style={{textAlign:'center'}} > {item.price} </TableCell>
                                       <TableCell align='right' >
                                         <Button variant='contained' color='primary' endIcon={<EditOutlined />} style={{margin:10}} onClick={()=>history.push(`/updateArticle/${item.id}`)}>Modifier</Button>
-                                        <Button variant='contained' endIcon={<Delete />} color='secondary' onClick={()=>dispatch(deleteArticle(item.id))}>Delete</Button>  
+                                        <Button variant='contained' endIcon={<Delete />} color='secondary' onClick={()=>dispatch(deleteArticle(item.id,token))}>Delete</Button>  
                                       </TableCell>
                                   </TableRow>
                               ))

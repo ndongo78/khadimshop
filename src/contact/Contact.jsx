@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import TextInput from '../components/TextInput'
 import { useStyles } from '../Styles/RegisterStyle'
-import { Container, Typography ,Grid,Button} from '@material-ui/core'
+import { Container, Typography ,Grid,Button, CssBaseline} from '@material-ui/core'
 import { Form, Formik } from 'formik'
 import * as Yup from "yup"
 import {useDispatch,useSelector} from 'react-redux'
@@ -38,12 +38,9 @@ const Contact = () => {
 
 
 
-
-
     return (
-        
-        <Container maxWidth='md' style={{height:'100vh'}}>
-             
+        <Container maxWidth='md' style={{height:'100vh',marginTop:50}}>
+             <CssBaseline />
             <Typography variant='h4' color='textPrimary' align='center'>Nous contacter</Typography>
             <Grid container>
             <Grid item xs={12} sm={12} md={12}>

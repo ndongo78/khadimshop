@@ -3,7 +3,6 @@ export const useStyles=makeStyles((theme)=>({
     AppBar:{
         backgroundColor: '#2979ff',
         padding: 15,
-        zIndex: theme.zIndex.drawer + 1,
         
     },
     Toolbar:{
@@ -97,8 +96,15 @@ export const useStyles=makeStyles((theme)=>({
       marginBottom: 100,
       fontSize:20
     },
-    toolbar: theme.mixins.toolbar,
+    toolbar: {
+      marginTop: 150,
+
+    },
     item:{
       color:theme.palette.common.white
-    }
+    },
+   grider:{
+     marginLeft: 10,
+     
+    },
 }))

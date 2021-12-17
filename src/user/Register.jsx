@@ -8,15 +8,23 @@ import { Form, Formik } from 'formik'
 import * as Yup from "yup"
 import TextInput from '../components/TextInput'
 import { useStyles } from '../Styles/RegisterStyle'
-
+import { useHistory } from 'react-router'
 
 
 
 function Register() {
-    const {registetError}=useSelector(state=>state.user)
+    const {registetError,registerSuccess}=useSelector(state=>state.user)
     const dispatch=useDispatch()
     const classes=useStyles()
     const [error] = useState()
+    const history=useHistory()
+
+    const redirectUser=()=>{
+         if(registerSuccess){
+           alert(registerSuccess)
+            history.push('/loggin')
+         }
+    }
 
 
     const validationSchema=Yup.object({
@@ -35,14 +43,13 @@ function Register() {
 
     return (
         <>
-        <Grid container>
+        <Grid container style={{marginTop:50,}}>
             <Grid item  className={classes.container}>
              <Container maxWidth='md' >
               <Typography variant='h2' className={classes.top}>Créer un compte</Typography>
-              {/* {
-                registerSuccess.success && <Typography variant='h6' style={{color:'green',}} align='center' gutterBottom > {registerSuccess.success} </Typography>
-
-              } */}
+              {
+                   redirectUser()
+              }
               <Typography variant='h6' color='error' align='center' gutterBottom > {registetError} </Typography>
                <Formik 
                 initialValues={
@@ -55,15 +62,16 @@ function Register() {
                   pays:'',
                   addresse:''}
                 }
-                onSubmit={(values,{resetForm})=>{
+                onSubmit={(values)=>{
+                  
                   dispatch(postUser(values))
-                   resetForm({})
+               
                }}
                validationSchema={validationSchema}
                >
                 
                 {
-                    ({handleChange,handleBlur,handleSubmit,values,touched,errors,setFieldTouched})=>(
+                    ({handleChange,handleBlur,handleSubmit,values,setFieldTouched})=>(
                       <Form noValidate autoComplete='off' className={classes.root}>
                     <div>
                  <TextInput 
@@ -150,6 +158,7 @@ function Register() {
                    >
                     <MenuItem value="">
                     </MenuItem>
+                    <MenuItem value="Sénagal">Sénagal</MenuItem>
                     <MenuItem value="Cote d'ivoire">Cote d'ivoire</MenuItem>
                     <MenuItem value="Gambie">Gambie</MenuItem>
                     <MenuItem value="Guinée Conakry">Guinée Conakry</MenuItem>

@@ -17,6 +17,7 @@ import {useHistory} from 'react-router-dom'
 const PostArticle = () => {
   const categories=useSelector(state=>state.categorie)
   const {articles}=useSelector(state=>state.article)
+  const {token} = useSelector(state => state.user)
    const dispatch=useDispatch()
     const classes=useStyles()
     let history=useHistory()
@@ -67,7 +68,7 @@ const PostArticle = () => {
                     fd.append('price',values.price)
                     fd.append('avis',values.avis)
                    
-                    dispatch(postArticles(fd))
+                    dispatch(postArticles(fd,token))
                     //resetForm({})
                     
                   }}

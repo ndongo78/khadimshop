@@ -4,14 +4,12 @@ export const useStyles=makeStyles((theme)=>({
     container:{
         backgroundColor: theme.palette.common.black,
         color:theme.palette.common.white,
-        flexGrow: 1,
       },
       links:{
           textDecoration:'none',
           fontSize: 15,
           color:theme.palette.common.white,
           padding: 6,
-          marginLeft: 110,
           display: 'flex',
       },
       linkContainer:{
@@ -28,5 +26,10 @@ export const useStyles=makeStyles((theme)=>({
           justifyContent: 'center',
           marginLeft: 15,
           
-      }
+      },
+      containerLink:{
+          display:'flex',
+          flexDirection:'column',
+          alignItems:'center'
+        }
 }))

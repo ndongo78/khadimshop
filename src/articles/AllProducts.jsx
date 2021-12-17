@@ -3,25 +3,34 @@ import React,{useEffect} from 'react'
 import { getAllArticle } from '../redux/actions/ActionArticle';
 import { addToCart } from '../redux/actions/ActionCart';
 import { Button, Grid, IconButton, Typography, Box, Tooltip, CssBaseline } from '@material-ui/core'
+import HandleLoading from '../components/Loading';
 import { useDispatch,useSelector } from 'react-redux'
 import { FavoriteBorderOutlined, Sync, VisibilityOutlined,ShoppingCartOutlined } from '@material-ui/icons'
 import { useStyles } from './styles/AllProductStyle';
+import {useHistory} from 'react-router-dom'
 
 
 const AllProducts = () => {
-    const {articles}=useSelector(state=>state.article)
+    const {articles,error}=useSelector(state=>state.article)
     const dispatch=useDispatch()
     const classes=useStyles()
     const [open] = React.useState(false);
+    const history=useHistory()
+
+
 
   useEffect(() => {
      dispatch(getAllArticle())
-  }, [dispatch])
-    return (
-        <Grid container style={{marginTop: 30,
-        }} >
-          <CssBaseline />
-              {
+     if(error){
+         alert(error)
+     }
+    }, [dispatch,error])
+    
+
+
+    const productList=()=>(
+                <>
+                {
                 articles.map((item,i)=>(
                         <Grid item sm={12} xs={12} md={3} key={i} className={classes.containerProduct}>
                           <Grid item sm={12} xs={12} style={{display: 'flex',
@@ -37,7 +46,7 @@ const AllProducts = () => {
                                 <Grid className={classes.iconButton}>
                                 
                                 <Tooltip title="Voir Détail" aria-label="Voir Détail" > 
-                                <IconButton style={{padding:15}} onClick={()=>alert(item.id)} > <VisibilityOutlined style={{fontSize:30}} /> </IconButton>
+                                <IconButton style={{padding:15}} onClick={()=>history.push(`/details/${item.id}`)} > <VisibilityOutlined style={{fontSize:30}} /> </IconButton>
                                 </Tooltip>
 
                                 <Tooltip title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
@@ -58,8 +67,20 @@ const AllProducts = () => {
                                 </Button>
                         </Grid>
                         </Grid>
-                ))
+                      ))
+                  }
+              </>
+    )
+
+
+
+    return (
+        <Grid container style={{marginTop: 50}} >
+          <CssBaseline />
+            {
+             articles.length===0 ? HandleLoading() : productList()
             }
+                
         </Grid>
     )
 }

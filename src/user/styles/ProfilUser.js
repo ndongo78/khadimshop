@@ -55,6 +55,8 @@ export const useStyles=makeStyles((theme)=>({
           background:'transparent',
           cursor: 'pointer',
       },
+    width: '100%',
+    height:'100%',
   },
   links:{
       textDecoration:'none',

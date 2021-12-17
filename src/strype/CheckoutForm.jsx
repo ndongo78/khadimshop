@@ -7,8 +7,9 @@ import {
 } from "@stripe/react-stripe-js";
 import { Button, Container, Grid, Paper, Typography,Box } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import { useStyle } from '../Styles/CartStyle'
+import { payerCommande } from "../api";
+
 
 
 const CARD_OPTIONS = {
@@ -143,16 +144,19 @@ const CheckoutForm = () => {
     try {
       const {id}=paymentMethod
       
-      const response=await axios.post('http://localhost:3001/commande/payement',{
-        amount:total
-        ,id
-        ,
-        cart:cart.map(item=>item.id),
-        billingDetails,
-        userid:user.map(item=>item.id)
-      })
-      if(response.data.success ===true){
+      // const response=await axios.post('http://localhost:5000/commande/payement',{
+      //   amount:total
+      //   ,id
+      //   ,
+      //   cart:cart.map(item=>item.id),
+      //   billingDetails,
+      //   userid:user.map(item=>item.id)
+      // })
+        const response=payerCommande(total,id,cart.map(item=>item.id),billingDetails,user.map(item=>item.id))
+        //console.log(response)
+      if(response.data.message ===true){
         setPaymentMethod(true)
+        history.push('/commandes')
       }
   } catch (error) {
       console.log(error);

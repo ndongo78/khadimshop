@@ -33,8 +33,10 @@ export const useStyles=makeStyles((theme)=>({
         margin: 'auto',
     },
     contain:{
-      backgroundColor: '#fafafa',
-      marginLeft: 130,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     erreurInput:{
       color:'red',

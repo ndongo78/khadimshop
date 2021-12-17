@@ -11,7 +11,7 @@ import TextInput from '../components/TextInput'
 import { useHistory } from 'react-router'
 
 const ModifierInfo = () => {
-    const {user}=useSelector(state=>state.user)
+    const {user,token}=useSelector(state=>state.user)
     const dispatch=useDispatch()
     const classes=useStyles()
     const history=useHistory()
@@ -30,9 +30,8 @@ const ModifierInfo = () => {
         .max(15,"Longueur de nom no auth"),
         prenom: Yup.string().required('Required'),
         email: Yup.string().required('Required').email('invalid email'),
-        password: Yup.string().required('Required').min(8, "Le mot de pass require min 8 charactéres"),
-        confirm_password: Yup.string().required("Required").oneOf([Yup.ref('password'),null],"Mot de pass n'est pas identique")  ,
-        telephone:Yup.number().required("Required"),
+        telephone: Yup.string().required('Required').min(8,'invalid phone number')
+        .matches(/^[0-9]*$/,'invalid phone number'),
         addresse:Yup.string().required('Required'),
         pays:Yup.string().required('Required')
     })
@@ -52,8 +51,8 @@ const ModifierInfo = () => {
                 user.length !== 0 ?
                 <>
                     {
-               user.length !== 0 &&
-               user.map(item=>(
+               
+               user?.map(item=>(
                 <List className={classes.root} component='nav'>
                 <ListItem button>
                 <ListItemIcon>
@@ -146,8 +145,6 @@ const ModifierInfo = () => {
                 { nom:item.nom,
                  prenom:item.prenom,
                  email:item.email,
-                 password:item.password,
-                 confirm_password:'',
                  telephone:item.telephone,
                  pays: item.pays,
                  addresse:item.addresse
@@ -166,7 +163,7 @@ const ModifierInfo = () => {
                onSubmit={(values)=>{
                    const id=item.id
                    dispatch(updateUser(
-                       id,values
+                       id,values,token
                    ))
                    setOpen(false)
                }}
@@ -203,27 +200,6 @@ const ModifierInfo = () => {
                             value={values.email}
                             />
                         </Grid>
-                        
-                         <Grid style={{margin:15}}>
-                        <TextInput 
-                        name='password'
-                        label='Mot de pass'
-                        type='password'
-                        onChange={handleChange('password')}
-                        onBlur={()=>setFieldTouched('paasword')}
-                        value={values.password}
-                       />
-                       </Grid>
-                       <Grid style={{margin:15}}>
-                       <TextInput 
-                        name='confirm_password'
-                        label='Confirmer mot de pass'
-                        type='password'
-                        onChange={handleChange('confirm_password')}
-                        onBlur={()=>setFieldTouched('confirm_password')}
-                        value={values.confirm_password}
-                        />
-                       </Grid>
                        <Grid style={{margin:15}}>
                        <TextInput 
                         name='telephone'

@@ -1,16 +1,16 @@
 import * as api from '../../api'
 
 
-export const postArticles=(values)=>async(dispatch)=>{
+export const postArticles=(values,token)=>async(dispatch)=>{
       try {
-          const {data}=await api.postArticle(values);
+          const response=await api.postArticle(values,token);
           dispatch({
               type:"CREATE_ARTICLE",
-              payload:data
+              payload:response.data
           })
       
       } catch (error) {
-          console.log(error)
+          console.log(error.response.errors)
       }
 
 }
@@ -52,6 +52,18 @@ export const getArticle=()=>async(dispatch)=>{
         
     }
 }
+//get by id
+export const getDetailArticle=(id)=>async(dispatch)=>{
+    try {
+        const {data}=await api.getArticleById(id)
+        dispatch({
+            type:'GET_ARTICLE_BY_ID',
+            payload:data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 //popular
 
@@ -81,22 +93,22 @@ export const getArticleNoted=()=>async(dispatch)=>{
 }
 //delete 
 
-export const deleteArticle=(id)=>async(dispatch)=>{
+export const deleteArticle=(id,token)=>async(dispatch)=>{
     try {
-         await api.deleteArticle(id)
+         await api.deleteArticle(id,token)
          dispatch({
              type:"DELETE_ARTICLE",
              payload:id
          })
     } catch (error) {
-        console.log(error)
+        console.log(error.response)
     }
 }
 //update article 
 
-export const updateArticle=(id,values)=>async(dispatch)=>{
+export const updateArticle=(id,values,token)=>async(dispatch)=>{
      try {
-        await api.updateArticle(id,values)
+        await api.updateArticle(id,values,token)
          dispatch({
              type:"UPDATE_ARTICLE",
              payload: id
@@ -120,12 +132,12 @@ export const getArticleFor=()=>async(dispatch)=>{
 
 export const getElementId=(id)=>async(dispatch)=>{
     try {
-        const {data} =await api.getElement(id)
+        const response =await api.getElement(id)
         dispatch({
-            type:"GET_ELEMENT",
-            payload:data
+            type:'GET_ARTICLE_BY_ID',
+            payload:response.data
         })
     } catch (error) {
-        
+        console.log(error.response)
     }
 }

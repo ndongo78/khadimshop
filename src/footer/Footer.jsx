@@ -8,9 +8,8 @@ import {FaFacebookF,FaInstagram,FaWhatsapp} from 'react-icons/all'
 const Footer = () => {
     const classes=useStyles()
     return (
-        <>
         <Grid container className={classes.container}>
-            <Grid item sm={12} xs={12} md={3} >
+            <Grid item sm={12} xs={12} md={3} className={classes.containerLink}>
               <Typography variant='h5' align='center' gutterBottom className={classes.titre}> Catégories de produits </Typography>
               <Box className={classes.linkContainer}>
                   <Link to='/ordinateur' className={classes.links}>Ordinateurs portables</Link>
@@ -20,8 +19,8 @@ const Footer = () => {
                   <Link to='/iphones' className={classes.links}>Iphones</Link>
               </Box>
             </Grid>
-            <Grid item sm={12} xs={12} md={3}>
-            <Typography variant='h5' align='center' gutterBottom className={classes.titre}> Informations  </Typography>
+            <Grid item sm={12} xs={12} md={3} className={classes.containerLink}>
+            <Typography variant='h5' align='center' gutterBottom className={classes.titre}> Informations légales  </Typography>
             <Box className={classes.linkContainer}>
                   <Link to='/' className={classes.links}>Qui sommes nous</Link>
                   <Link to='/' className={classes.links}>Mentions légales</Link>
@@ -30,7 +29,7 @@ const Footer = () => {
                   <Link to='/' className={classes.links}>Contact</Link>
               </Box>
             </Grid>
-            <Grid item sm={12} xs={12} md={3}>
+            <Grid item sm={12} xs={12} md={3} className={classes.containerLink}>
             <Typography variant='h5' align='center' gutterBottom className={classes.titre}> Compte utilisateur  </Typography>
             <Box className={classes.linkContainer}>
                   <Link to='/ordinateur' className={classes.links}>Mon compte</Link>
@@ -40,7 +39,7 @@ const Footer = () => {
                   <Link to='/accessoires' className={classes.links}>Mes sav</Link>
               </Box>
             </Grid>
-            <Grid item sm={12} xs={12} md={3}>
+            <Grid item sm={12} xs={12} md={3} className={classes.containerLink}>
             <Typography variant='h5' align='center' gutterBottom className={classes.titre}> Nous contacter  </Typography>
             <Box className={classes.linkContainer} >
                   <Typography  className={classes.links} ><Room fontSize='small' style={{margin:4}} /> 3 avenue du  Pr L. Sedar Senghor</Typography>
@@ -56,12 +55,10 @@ const Footer = () => {
             </Grid>
             <Container>
             <Typography variant='body1'  style={{display: 'flex',alignItems:'center',justifyContent: 'center',opacity:'.5'}}>
-             <Copyright /> ndongodahs.fr 2021
+             <Copyright /> ndongodahs.fr {new Date().getFullYear()}
             </Typography>
             </Container>
         </Grid>
-         
-        </>
     )
 }
 

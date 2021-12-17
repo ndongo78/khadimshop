@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import {useDispatch,useSelector} from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { Button, Container, Grid, Typography, CssBaseline, Avatar, IconButton } from '@material-ui/core'
@@ -11,32 +11,37 @@ import { loginUser } from '../redux/actions/ActionUser';
 import { LockOutlined,Visibility,VisibilityOff } from '@material-ui/icons';
 
 const Loggin=()=> {
-     const {role,logginError}=useSelector(state=>state.user)
+     const {logginError,isUser,isAdmin}=useSelector(state=>state.user)
      const [showPassword, setshowPassword] = useState(false)
      const dispatch=useDispatch()
       const classes=useStyles()
      let history = useHistory();
 
+
      const handleSubmit=(values)=>{
       dispatch( loginUser(values))
      }
+
+      useEffect(() => {
+        if(isAdmin){
+          history.push('/admin')
+        }
+        if(isUser){
+          history.push('/profil')
+        }
+      }, [isUser,history,isAdmin])
    
   
     const validationSchema=Yup.object({
         email: Yup.string().required('Required').email('invalid email'),
         password: Yup.string().required('Required').min(8, "Le mot de pass require min 8 charactéres"),
     })
-    
+
+
     return (
       <>
        <CssBaseline />
-           {
-             role ==='admin' && history.push('/admin')
-           }
-           {
-             role ==='client' && history.push('/profil')
-           }
-            <Grid container>
+            <Grid container style={{marginTop:100}}>
             <Grid item className={classes.container} sm={12} xs={12} >
               <Container maxWidth='xs'className={classes.midle}>
                <div className={classes.contain}>

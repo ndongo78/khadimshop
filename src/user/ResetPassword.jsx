@@ -1,9 +1,8 @@
 import React,{useState} from 'react'
-import { Container, InputBase, Typography, Box, Button, IconButton} from '@material-ui/core'
+import { Container, InputBase, Typography, Box, Button} from '@material-ui/core'
 import { useHistory } from 'react-router'
 import { useDispatch,useSelector } from 'react-redux'
 import { resetPassword } from '../redux/actions/ActionUser'
-import { AiOutlineClose } from 'react-icons/ai'
 
 const ResetPassword = () => {
     const history=useHistory()
@@ -14,7 +13,7 @@ const ResetPassword = () => {
  const handleSubmit=(e)=>{
      e.preventDefault()
      dispatch(resetPassword({email}))
-     setemail('')
+     //setemail('')
    
  }
 

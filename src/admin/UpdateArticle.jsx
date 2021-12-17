@@ -5,19 +5,19 @@ import { Grid, Typography,Button,Container, MenuItem, TextField, Paper } from '@
 import { updateArticle,getElementId } from '../redux/actions/ActionArticle'
 import { Form, Formik} from 'formik'
 import * as Yup from "yup"
-import { useParams } from 'react-router'
+import { useParams,useHistory } from 'react-router'
 import TextInput from '../components/TextInput'
 import {useStyles} from '../articles/styles/ArticleStyle'
 import SelectInput from '../components/SelectInput'
 import { ArrowBack } from '@material-ui/icons'
-import {useHistory} from 'react-router-dom'
 
 
 
 
 const UpdateArticle = (props) => {
   const categories=useSelector(state=>state.categorie)
-  const {articles,updatedArticle}=useSelector(state=>state.article)
+  const {articles}=useSelector(state=>state.article)
+  const {token}=useSelector(state=>state.user)
    const dispatch=useDispatch()
     const classes=useStyles()
     let history=useHistory()
@@ -28,10 +28,10 @@ const UpdateArticle = (props) => {
      dispatch(getCategorie())
     // setnewArticle(article.find(item=> item.id ==props.match.params.id))
     dispatch(getElementId(props.match.params.id))
-  }, [dispatch])
+  }, [dispatch,props.match.params.id])
  
 
- ///console.log(articles.find(item=> item.id ===props.match.params.id));
+
 
   const validationSchema=Yup.object({
     categoryId: Yup.number().required('Required'),
@@ -42,9 +42,6 @@ const UpdateArticle = (props) => {
     return (
         <Grid>
             <Grid container>
-            {
-            console.log(articles.find(item=>item.id ==id))
-            }
             <Grid item className={classes.container} >
               <Button startIcon={<ArrowBack style={{fontSize: '30px',
               }}  />} size='medium' onClick={()=>history.push('/admin')} color='inherit' className={classes.retourIcon}  > Retour Profil </Button> 
@@ -54,12 +51,12 @@ const UpdateArticle = (props) => {
                   initialValues={
                     articles ?
                  {
-                   categoryId:articles.find(item=>item.id ==id).categoryId,
-                  title:articles.find(item=>item.id ==id).title,
-                  description:articles.find(item=>item.id ==id).description,
-                  price:articles.find(item=>item.id ==id).price,
-                  image:articles.find(item=>item.id ==id).image,
-                  avis:articles.find(item=>item.id ==id).avis
+                   categoryId:articles.find(item=>item.id ===id).categoryId,
+                  title:articles.find(item=>item.id ===id).title,
+                  description:articles.find(item=>item.id ===id).description,
+                  price:articles.find(item=>item.id ===id).price,
+                  image:articles.find(item=>item.id ===id).image,
+                  avis:articles.find(item=>item.id ===id).avis
                 }
                   : 
                   {
@@ -82,9 +79,9 @@ const UpdateArticle = (props) => {
                     fd.append('price',values.price)
                     fd.append('avis',values.avis)
                    
-                   dispatch(updateArticle(id,values))
-                    //resetForm({})
-                    
+                   dispatch(updateArticle(id,values,token))
+                  
+                   resetForm({})
                   }}
                 >
                  {

@@ -22,6 +22,7 @@ import ResetPassword from './user/ResetPassword';
 import Recupe from './user/Recupe'
 import { CssBaseline } from '@material-ui/core';
 import Contact from './contact/Contact';
+import Details from './articles/Details';
 
 const App=()=> {
   return (
@@ -48,6 +49,7 @@ const App=()=> {
        <Route path='/resetPassword' component={ResetPassword} />
        <Route path='/changerPassword/:token/:id' component={Recupe} />
        <Route path='/contact' component={Contact} />
+       <Route path='/details/:id' component={Details} />
      </Switch> 
      <Footer />
      </Router>

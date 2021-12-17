@@ -4,11 +4,13 @@ export const useStyle=makeStyles((theme)=>({
     container1:{
         height:'100vh',
         paddingBottom:20,
+        marginTop:50
     },
     container:{
         paddingBottom:20,
        "@media only screen and (max-width : 480px)":{
-           paddingBottom: 20
+           paddingBottom: 20,
+           marginTop:50
     },
     },
     boxs:{

@@ -17,11 +17,13 @@ const Profil = () => {
     const dispatch=useDispatch()
     const classes=useStyles()
    const history=useHistory()
+   console.log(user)
 
     useEffect(() => {
         dispatch(getLast(user.map(item=>item.id)))
     }, [user,dispatch])
-    console.log(user[0].prenom);
+    
+    
     const loggOut=()=>{
       dispatch(logOut())
       history.push('/')
@@ -30,7 +32,7 @@ const Profil = () => {
 
 
     return (
-        <>
+        <Grid style={{marginTop:80,height:'100vh'}}>
         <CssBaseline />
         <Box style={{display: 'flex',
         justifyContent: 'space-between',
@@ -84,7 +86,7 @@ const Profil = () => {
                        ))
                    }
            </Grid>
-           <Grid container spacing={1} style={{marginBottom: 20,
+           <Grid container spacing={3} style={{marginBottom: 20,
         }}>
              <Grid item sm={12} xs={12} md={3} >
                <Paper className={classes.grid1}>
@@ -142,7 +144,7 @@ const Profil = () => {
         </Container> 
         : history.push('/loggin')
       }
-        </>
+        </Grid>
     )
 }
 
