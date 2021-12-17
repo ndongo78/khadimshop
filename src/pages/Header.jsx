@@ -1,5 +1,5 @@
 import {useState,useEffect  } from 'react'
-import { AppBar, Badge,  IconButton, InputBase, Toolbar, Typography , Box ,ListItem,List, SwipeableDrawer, Grid, Button,Tooltip,useTheme,useMediaQuery} from '@material-ui/core'
+import { AppBar, Badge,  IconButton, InputBase, Toolbar, Typography , Box ,ListItem,List, SwipeableDrawer, Grid, Button,Tooltip,useTheme,useMediaQuery, CssBaseline, Drawer} from '@material-ui/core'
 import logo from '../images/logo.png'
 import React from 'react'
 import { Link,useHistory  } from 'react-router-dom'
@@ -104,7 +104,7 @@ const Header=()=> {
                 <Box className={classes.drawer}>
                     <Box style={{display:'flex',justifyContent:'space-between'}}>
                     <IconButton 
-                    onClick={()=>setmobileView(!mobileView)}
+                    onClick={()=>setmobileView(true)}
                     >
                     <Menu
                     edge='start'
@@ -118,10 +118,9 @@ const Header=()=> {
                     {
                         mobileShow &&
 
-                    <SwipeableDrawer
+                    <Drawer
                     open={mobileView}
-                    onClose={()=>setmobileView(!mobileView)}
-                    onOpen={()=>setmobileView(!mobileView)}
+                    onClose={()=>setmobileView(false)}
                     >
                     <List>
                         <ListItem button key='home' onClick={()=>history.push('/')}>
@@ -147,7 +146,7 @@ const Header=()=> {
                         </ListItem>
                         </Box>
                     </List>
-                    </SwipeableDrawer>
+                    </Drawer>
                     }
                     </Box>
      )
@@ -163,6 +162,8 @@ const Header=()=> {
 
 
     return (
+        <>
+        <CssBaseline/>
         <Box sx={{flexGrow:1}}>
             <AppBar className={classes.AppBar} position='fixed' >
              {
@@ -211,7 +212,7 @@ const Header=()=> {
                 }
             </Grid>
         </Box>
-        
+        </>
     )
 }
 
