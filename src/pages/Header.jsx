@@ -1,5 +1,5 @@
 import {useState,useEffect  } from 'react'
-import { AppBar, Badge,  IconButton, InputBase, Toolbar, Typography , Box ,ListItem,List, SwipeableDrawer, Grid, Button,Tooltip} from '@material-ui/core'
+import { AppBar, Badge,  IconButton, InputBase, Toolbar, Typography , Box ,ListItem,List, SwipeableDrawer, Grid, Button,Tooltip,useTheme,useMediaQuery} from '@material-ui/core'
 import logo from '../images/logo.png'
 import React from 'react'
 import { Link,useHistory  } from 'react-router-dom'
@@ -23,8 +23,11 @@ const Header=()=> {
     const [error, seterror] = useState('')
     let history= useHistory()
     const dispatch=useDispatch()
+    const [open,setOpen]=useState(false)
     const [search, setsearch] = useState('')
     const [article, setarticle] = useState(null)
+    const theme=useTheme()
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleSearch=(text)=>{
         setsearch(text)
@@ -99,9 +102,6 @@ const Header=()=> {
  const mobileShow=()=>{
           return(
                 <Box className={classes.drawer}>
-                    {
-                        mobileShow &&
-                    <>
                     <Box style={{display:'flex',justifyContent:'space-between'}}>
                     <IconButton 
                     onClick={()=>setmobileView(!mobileView)}
@@ -115,6 +115,8 @@ const Header=()=> {
                     </IconButton>
                     <img src={logo} alt='logo' className={classes.logoMobile} />
                     </Box>
+                    {
+                        mobileShow &&
 
                     <SwipeableDrawer
                     open={mobileView}
@@ -146,7 +148,6 @@ const Header=()=> {
                         </Box>
                     </List>
                     </SwipeableDrawer>
-                </>
                     }
                     </Box>
      )
@@ -165,7 +166,7 @@ const Header=()=> {
         <Box sx={{flexGrow:1}}>
             <AppBar className={classes.AppBar} position='fixed' >
              {
-                   window.innerWidth < 600 ? mobileShow(): destopView()
+                   isMobile ? mobileShow(): destopView()
              }
             </AppBar>
             <div className={classes.toolbar}></div>
