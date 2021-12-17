@@ -44,7 +44,7 @@ function Register() {
     return (
         <>
         <Grid container style={{marginTop:50,}}>
-            <Grid item  className={classes.container}>
+            <Grid item xs={12} sm={12} md={3} className={classes.container}>
              <Container maxWidth='md' >
               <Typography variant='h2' className={classes.top}>Créer un compte</Typography>
               {

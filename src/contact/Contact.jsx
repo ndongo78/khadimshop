@@ -43,7 +43,11 @@ const Contact = () => {
              <CssBaseline />
             <Typography variant='h4' color='textPrimary' align='center'>Nous contacter</Typography>
             <Grid container>
-            <Grid item xs={12} sm={12} md={12}>
+            <Grid item sm={12} xs={12} md={2}></Grid>
+            <Grid item xs={12} sm={12} md={4}>
+             <Container maxWidth='md' style={{display: 'flex',
+             alignItems:'center'
+             }}>
             <Formik 
               
                 initialValues={
@@ -109,6 +113,7 @@ const Contact = () => {
                 }
                 
                </Formik>
+               </Container>
                </Grid>
                
             </Grid>

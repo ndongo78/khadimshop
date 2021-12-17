@@ -99,6 +99,9 @@ const Header=()=> {
  const mobileShow=()=>{
           return(
                 <Box className={classes.drawer}>
+                    {
+                        mobileShow &&
+                    <>
                     <Box style={{display:'flex',justifyContent:'space-between'}}>
                     <IconButton 
                     onClick={()=>setmobileView(!mobileView)}
@@ -143,7 +146,9 @@ const Header=()=> {
                         </Box>
                     </List>
                     </SwipeableDrawer>
-                </Box>
+                </>
+                    }
+                    </Box>
      )
 }
 
