@@ -137,6 +137,12 @@ const Header=()=> {
                         <ShoppingBasket className={classes.item} style={{fontSize:35,color:'#2196f3'}}   />
                         </Badge>
                         </ListItem>
+                        {
+                            isLogin ?(
+                             <IconButton onClick={handleRedirect} color='inherit' size='medium'> <AccountCircleOutlined style={{fontSize: '30px',
+                        }}  /> </IconButton>
+                        ):
+                        (
                         <Box style={{marginTop:200,textAlign:'center'}}>
                         <ListItem button key='profil' onClick={()=>history.push('/register')}>
                             <Typography variant='h6'>S'incrire</Typography>
@@ -145,6 +151,9 @@ const Header=()=> {
                             <Typography variant='h6'>Se connecter</Typography>
                         </ListItem>
                         </Box>
+
+                        )
+                        }
                     </List>
                     </Drawer>
                     }
