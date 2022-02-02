@@ -46,7 +46,7 @@ const ProfilAdmin=()=> {
          <>
         <CssBaseline />
         <Button endIcon={<MenuIcon fontSize='20px'/> } color='primary' onClick={()=>setopen(true)} >Dasbord</Button>
-        <Typography variant='h3' color='Primary' align='center' gutterBottom>Bonjour {user.prenom}</Typography>
+        <Typography variant='h3' color='Primary' align='center' gutterBottom>Bonjour {user[0].prenom}</Typography>
             <Grid className={classes.root} >
             <Drawer className={classes.titre} 
             variant="persistent" 
@@ -91,6 +91,8 @@ const ProfilAdmin=()=> {
                 
                 </>
             }
+             <Button   className={classes.buton}> <Link to="/clients" style={{textDecoration: 'none'}}>Gestion des clients</Link></Button>
+             <Button   className={classes.buton}> <Link to="/categories" style={{textDecoration: 'none'}}>Gestion des catégories</Link></Button>
              <Button   className={classes.buton}> <Link to="/postCategory" style={{textDecoration: 'none'}}>Créer une Catégory</Link></Button>
             <Button   className={classes.buton}> <Link to='/postArticle' style={{textDecoration: 'none'}}>Créer un Article</Link> 
             </Button>

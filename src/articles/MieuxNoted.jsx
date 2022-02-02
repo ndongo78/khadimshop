@@ -8,9 +8,11 @@ import { useDispatch,useSelector } from 'react-redux'
 import { useStyles } from '../Styles/ProduitStyle';
 import { useHistory } from 'react-router-dom'
 import HandleLoading from '../components/Loading';
+import { addFavorite } from '../redux/actions/FavoriteAction';
 
 const NotedArticle = () => {
     const {articles}=useSelector(state=>state.article)
+    const {user,token}=useSelector(state=>state.user)
     const dispatch=useDispatch()
     const classes=useStyles()
     const [open] = React.useState(false);
@@ -19,6 +21,16 @@ const NotedArticle = () => {
   useEffect(() => {
      dispatch(getArticleNoted())
   }, [dispatch])
+
+  const addingFavorite=(id)=>{
+    if(user.length ===0 ){
+      alert('Veuillez vous connecter pour ajouter un article a votre liste de favoris')
+    }else{
+       dispatch(addFavorite(id,token))
+    }
+
+  }
+
 
 
     return (
@@ -48,7 +60,7 @@ const NotedArticle = () => {
                                             <IconButton style={{padding:15}} onClick={()=>history.push(`/details/${item.id}`)} > <VisibilityOutlined style={{fontSize:30}} /> </IconButton>
                                             </Tooltip>
                                             <Tooltip title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
-                                            <IconButton color='secondary' style={{padding:15}}> <FavoriteBorderOutlined style={{fontSize:30}} /> </IconButton>
+                                            <IconButton color='secondary' style={{padding:15}} onClick={()=>addingFavorite(item.id)}> <FavoriteBorderOutlined style={{fontSize:30}} /> </IconButton>
                                             </Tooltip>
                                             <IconButton color='secondary' style={{padding:15}}><Sync style={{fontSize:30}} /></IconButton>
                                             </Grid> 

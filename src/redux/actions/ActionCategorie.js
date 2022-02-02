@@ -23,6 +23,44 @@ export const postCategory=(values,token)=>async(dispatch)=>{
                payload:response.data
            })
        } catch (error) {
-           console.log(error.response.errors)
+           console.log(error)
        }
 }
+//update categorie
+export const updateCategory=(id,values,token)=>async(dispatch)=>{
+    try {
+        const response=await api.updateCategory(id,values,token)
+        dispatch({
+            type:"UPDATE_CATEGORIE",
+            payload:response.data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+//delete categorie
+export const deleteCategory=(id,token)=>async(dispatch)=>{
+    try {
+        const response=await api.deleteCategory(id,token)
+        dispatch({
+            type:"DELETE_CATEGORIE",
+            payload:response.data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+//get categorie by id
+export const getCategoryById=(id)=>async(dispatch)=>{
+    try {
+        const {data}= await api.getCategoryById(id)
+        console.log(data);
+        dispatch({
+            type:"FETCH_CATEGORIE_BY_ID",
+            payload:data
+        })
+    } catch (error) {
+        
+    }
+}
+//get categorie by id

@@ -23,6 +23,10 @@ import Recupe from './user/Recupe'
 import { CssBaseline } from '@material-ui/core';
 import Contact from './contact/Contact';
 import Details from './articles/Details';
+import Clients from './admin/Clients';
+import UpdateClient from './admin/UpdateClient';
+import Categories from './admin/Categories';
+import UpdateCategorie from './admin/UpdateCategorie';
 
 const App=()=> {
   return (
@@ -50,6 +54,10 @@ const App=()=> {
        <Route path='/changerPassword/:token/:id' component={Recupe} />
        <Route path='/contact' component={Contact} />
        <Route path='/details/:id' component={Details} />
+       <Route path='/clients' component={Clients} />
+       <Route path='/updateclient/:id' component={UpdateClient} />
+       <Route path='/categories' component={Categories} />
+       <Route path='/categorie/:id' component={UpdateCategorie} />
      </Switch> 
      <Footer />
      </Router>

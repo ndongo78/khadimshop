@@ -7,6 +7,7 @@ import { getLast } from '../redux/actions/CommandeAction'
 import{Box, Button, Container, Grid,  Paper, Typography,CssBaseline, IconButton, } from '@material-ui/core'
 import {FaUserAlt} from 'react-icons/fa'
 import {Link,useHistory} from 'react-router-dom'
+import Favorite from '../articles/Favorite'
 
 
 
@@ -17,7 +18,6 @@ const Profil = () => {
     const dispatch=useDispatch()
     const classes=useStyles()
    const history=useHistory()
-   console.log(user)
 
     useEffect(() => {
         dispatch(getLast(user.map(item=>item.id)))
@@ -32,7 +32,7 @@ const Profil = () => {
 
 
     return (
-        <Grid style={{marginTop:80,height:'100vh'}}>
+        <Grid style={{marginTop:80}}>
         <CssBaseline />
         <Box style={{display: 'flex',
         justifyContent: 'space-between',
@@ -123,7 +123,7 @@ const Profil = () => {
              </Grid>
              <Grid item sm={12} xs={12} md={3}>
                <Paper className={classes.grid1}>
-               <Link className={classes.links}>
+               <Link className={classes.links} to={'/contact'}>
                    <Typography align='center'>
                        <IoHelpOutline size='3rem' color='grey' />    
                      <Typography variant='h6'>Besoin d'aide</Typography>
@@ -135,12 +135,9 @@ const Profil = () => {
            </Grid>
            <Typography variant='h6' gutterBottom>Mes articles favorites</Typography>
            <Grid>
-               <Typography > Aucun article aux favorites</Typography>
+               <Favorite />
            </Grid>
-           <Typography variant='h6' gutterBottom>Les articles que vous avez notés</Typography>
-           <Grid>
-               <Typography >Vous avez pas encore noté aucun article</Typography>
-           </Grid>
+
         </Container> 
         : history.push('/loggin')
       }

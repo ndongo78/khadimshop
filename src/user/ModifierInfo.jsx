@@ -36,6 +36,8 @@ const ModifierInfo = () => {
         pays:Yup.string().required('Required')
     })
 
+    console.log(user);
+
 
 
     return (
@@ -53,7 +55,7 @@ const ModifierInfo = () => {
                     {
                
                user?.map(item=>(
-                <List className={classes.root} component='nav'>
+                <List className={classes.root} component='nav' key={item.id}>
                 <ListItem button>
                 <ListItemIcon>
                     <AiOutlineUser size='3rem' />
@@ -218,6 +220,17 @@ const ModifierInfo = () => {
                         onChange={handleChange('addresse')}
                         onBlur={()=>setFieldTouched('addresse')}
                         value={values.addresse}
+                        />
+                       </Grid>
+                       <Grid style={{margin:15}}>
+                       <TextInput 
+                        name='pays'
+                        label='pays'
+                        multiline
+                        maxRows={4}
+                        onChange={handleChange('pays')}
+                        onBlur={()=>setFieldTouched('pays')}
+                        value={values.pays}
                         />
                        </Grid>
                        <div className={classes.butonContainer}>

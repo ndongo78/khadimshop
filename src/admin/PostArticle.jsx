@@ -15,7 +15,7 @@ import {useHistory} from 'react-router-dom'
 
 
 const PostArticle = () => {
-  const categories=useSelector(state=>state.categorie)
+  const {categories}=useSelector(state=>state.categorie)
   const {articles}=useSelector(state=>state.article)
   const {token} = useSelector(state => state.user)
    const dispatch=useDispatch()

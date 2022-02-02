@@ -3,28 +3,35 @@ import { Grid, Typography,CssBaseline,Container,Box,Paper } from '@material-ui/c
 import { useSelector,useDispatch } from 'react-redux'
 import { useStyles } from '../user/styles/ProfilUser'
 import { getAllCommandes } from '../redux/actions/CommandeAction'
+import { useHistory } from 'react-router-dom'
 
 const Commandes = () => {
     const {commandes}=useSelector(state=>state.commande)
+    const {user,token}=useSelector(state=>state.user)
     const dispatch=useDispatch()
     const classes=useStyles()
-   
-   console.log(commandes);
+    const history=useHistory()
+  
      useEffect(() => {
-         dispatch(getAllCommandes())
-     }, [dispatch])
+         dispatch(getAllCommandes(token))
+         if(user.length === 0){
+            history.push('/loggin')
+         }
+     }, [dispatch,token])
 
+       console.log(commandes);
 
 
 
     return (
         <>
           <CssBaseline />
-          <Container maxWidth='md'>
-            <Typography variant='h4' color='primary' align='center' gutterBottom> Mes commandes</Typography>
+          <Container maxWidth='md' className={classes.root}>
+            <Typography variant='h2' color='primary'  align='center' gutterBottom> Mes commandes</Typography>
             <Grid>
             {
-                       commandes.map(item=>(
+                     commandes.length != 0 ?
+                       commandes?.map(item=>(
                         <Paper elevation={0} key={item.id} className={classes.container}>
                             <Box>
                             <img src={item.articles.image} width={200} alt=""  />
@@ -41,15 +48,10 @@ const Commandes = () => {
                                 </Box>
                                 
                             </Box>
-                            {/* <Box className={classes.btnContainer}>
-                               <Button variant='contained' color='primary'>
-                               <Link  style={{textDecoration:'none',color:'#fff'}}>
-                                   Voir mes commandes
-                                   </Link>
-                                   </Button>
-                            </Box> */}
                         </Paper>
+
                        ))
+                        : <Typography variant='h4' color='primary' align='center'  gutterBottom>Vous n'avez pas encore de commandes</Typography>
                    }
             </Grid>
           </Container>

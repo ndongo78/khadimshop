@@ -132,7 +132,7 @@ export const getArticleFor=()=>async(dispatch)=>{
 
 export const getElementId=(id)=>async(dispatch)=>{
     try {
-        const response =await api.getElement(id)
+        const response =await api.getArticleById(id)
         dispatch({
             type:'GET_ARTICLE_BY_ID',
             payload:response.data

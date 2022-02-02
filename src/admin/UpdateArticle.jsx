@@ -15,21 +15,23 @@ import { ArrowBack } from '@material-ui/icons'
 
 
 const UpdateArticle = (props) => {
-  const categories=useSelector(state=>state.categorie)
-  const {articles}=useSelector(state=>state.article)
+  const {categories}=useSelector(state=>state.categorie)
+  const {articles,detail}=useSelector(state=>state.article)
   const {token}=useSelector(state=>state.user)
    const dispatch=useDispatch()
     const classes=useStyles()
     let history=useHistory()
     const {id}=useParams()
+    const {title,description,price,image,avis,categoryId}=detail
 
 
   useEffect(() => {
      dispatch(getCategorie())
     // setnewArticle(article.find(item=> item.id ==props.match.params.id))
-    dispatch(getElementId(props.match.params.id))
-  }, [dispatch,props.match.params.id])
+    dispatch(getElementId(id))
+  }, [dispatch,id])
  
+  console.log(detail);
 
 
 
@@ -49,14 +51,14 @@ const UpdateArticle = (props) => {
            
                <Formik 
                   initialValues={
-                    articles ?
+                    detail ?
                  {
-                   categoryId:articles.find(item=>item.id ===id).categoryId,
-                  title:articles.find(item=>item.id ===id).title,
-                  description:articles.find(item=>item.id ===id).description,
-                  price:articles.find(item=>item.id ===id).price,
-                  image:articles.find(item=>item.id ===id).image,
-                  avis:articles.find(item=>item.id ===id).avis
+                   categoryId:categoryId,
+                  title:title,
+                  description:description,
+                  price:price,
+                  image:image,
+                  avis:avis
                 }
                   : 
                   {

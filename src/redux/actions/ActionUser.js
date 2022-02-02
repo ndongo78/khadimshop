@@ -1,6 +1,71 @@
 import * as api from '../../api';
 import jwtDecode from 'jwt-decode';
-import { LOGIN_USER ,LOGIN_ERROR, LOGOUT,GET_TOKEN,UPDATE_USER,REGISTER_USER,REGISTER_ERROR,LOGIN_ADMIN} from '../constants';
+import { LOGIN_USER ,LOGIN_ERROR, LOGOUT,GET_TOKEN,UPDATE_USER,REGISTER_USER,REGISTER_ERROR,LOGIN_ADMIN,ALL_USERS,
+    ALL_USERS_ERROR ,UPDATE_USER_ADMIN
+} from '../constants';
+
+//get all users
+export const getAllUsers = (token) => async dispatch => {
+    try {
+        const response = await api.getAllUsers(token);
+        dispatch({
+            type: ALL_USERS,
+            payload: response.data
+        });
+    } catch (error) {
+        dispatch({
+            type: ALL_USERS_ERROR,
+            payload: error.response.data.error
+        });
+    }
+};
+//update user by admin
+export const updateUserByAdmin = (id,user,token) => async dispatch => {
+    try {
+        const response = await api.updateUserByAdmin(id,user,token);
+        dispatch({
+            type: UPDATE_USER_ADMIN,
+            payload: response.data
+        });
+    } catch (error) {
+        dispatch({
+            type: "UPDATE_USER_ERROR",
+            payload: error.response.data.error
+        });
+    }
+};
+//delete user by admin
+export const deleteUserByAdmin = (id,token) => async dispatch => {
+    try {
+        const response = await api.deleteUserByAdmin(id,token);
+        dispatch({
+            type: "DELETE_USER",
+            payload: response.data
+        });
+    }
+    catch (error) {
+        dispatch({
+            type: "DELETE_USER_ERROR",
+            payload: error.response.data.error
+        });
+    }
+};
+//get user by id
+export const getUserById = (id,token) => async dispatch => {
+    try {
+        const response = await api.getUserById(id,token);
+        dispatch({
+            type: "GET_USER_BY_ID",
+            payload: response.data
+        });
+    }
+    catch (error) {
+        dispatch({
+            type: "GET_USER_BY_ID_ERROR",
+            payload: error.response.data.error
+        });
+    }
+};
 
 //create user
 export  const postUser=(user)=>async(dispatch)=>{
@@ -13,16 +78,7 @@ export  const postUser=(user)=>async(dispatch)=>{
                 payload:response.data.message
             })
         }
-        //   if(data.error){
-        //       dispatch({
-        //         type:"ERROR_REGISTER",
-        //         payload:data.error
-        //       })
-        //   }
-        // dispatch({
-        //     type:"REGISTER_USER",
-        //     payload: data
-        // })
+   
        
     } catch (error) {
         //console.log(error.response.data.errors)
@@ -60,35 +116,7 @@ export const loginUser=(values)=>async(dispatch)=>{
         }
        
         
-    //     if(response.data.user){
-           
-    //         dispatch({
-    //         type:"LOGIN_USER",
-    //         payload:response.data.user
-    //         })  
-    //     }
-    //     if(response.data.user){
-    //          if(response.data.user.role === 'admin'){
-    //          dispatch({
-    //            type: 'LOGIN_ADMIN',
-    //            payload:response.data.user.role
-    //        })
-    //         }
-    //         if(response.data.user.role === 'client'){
-    //             dispatch({
-    //             type: 'LOGIN_ADMIN',
-    //             payload:response.data.user.role
-    //         })
-    //     }
-    //     }else{
-    //     if(response.data.error){
-    //        dispatch({
-    //            type:"LOGIN_ERROR",
-    //            payload:response.data.error
-    //        })
-    //    } 
-    //     }
-      
+    
     } catch (error) {
         if(error.response){
             dispatch({

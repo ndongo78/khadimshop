@@ -1,6 +1,6 @@
 import { Button, Grid, IconButton, Typography, Box, Tooltip, } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating';
-import { FavoriteBorderOutlined, Sync, VisibilityOutlined,ShoppingCartOutlined } from '@material-ui/icons'
+import { FavoriteBorderOutlined, Sync, VisibilityOutlined,ShoppingCartOutlined,Favorite } from '@material-ui/icons'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import React,{useEffect} from 'react'
@@ -10,6 +10,7 @@ import { useStyles } from '../Styles/ProduitStyle'
 import { addToCart } from '../redux/actions/ActionCart';
 import { useHistory } from 'react-router-dom'
 import HandleLoading from '../components/Loading';
+import {addFavorite,getFavorite} from '../redux/actions/FavoriteAction'
 
 const responsive = {
     desktop: {
@@ -34,16 +35,28 @@ const responsive = {
 
 const Products = (props) => {
     const {newArticles}=useSelector(state=>state.article)
+    const {favorite}=useSelector(state=>state.favorite)
+    const {user,token}=useSelector(state=>state.user)
     const dispatch=useDispatch()
     const classes=useStyles()
     const [open] = React.useState(false);
     const history=useHistory()
+    const [isFavorite,setisFavorite]=React.useState(false)
 
 
   useEffect(() => {
      dispatch(getNewArticle())
-  }, [dispatch])
+  }, [dispatch,isFavorite])
 
+   const addingFavorite=(id)=>{
+     if(user.length ===0 ){
+       alert('Veuillez vous connecter pour ajouter un article a votre liste de favoris')
+     }else{
+        dispatch(addFavorite(id,token))
+        
+     }
+
+   }
 
 
     return (
@@ -91,7 +104,8 @@ const Products = (props) => {
                                 <IconButton style={{padding:15}} onClick={()=>history.push(`/details/${item.id}`)} > <VisibilityOutlined style={{fontSize:30}} /> </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
-                                <IconButton color='secondary' style={{padding:15}}> <FavoriteBorderOutlined style={{fontSize:30}} /> </IconButton>
+                                  <IconButton style={{padding:15}} onClick={()=>addingFavorite(item.id)}> <FavoriteBorderOutlined style={{fontSize:30}} /> </IconButton>
+                                
                                 </Tooltip>
                                 <IconButton color='secondary' style={{padding:15}}><Sync style={{fontSize:30}} /></IconButton>
                                  </Grid> 

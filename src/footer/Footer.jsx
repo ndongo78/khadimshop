@@ -4,6 +4,7 @@ import { useStyles } from './FooterStyle'
 import { Link } from 'react-router-dom'
 import { Copyright, LocationCity, Mail, Phone, Room } from '@material-ui/icons'
 import {FaFacebookF,FaInstagram,FaWhatsapp} from 'react-icons/all'
+import pdf from '../docs/conditions.pdf'
 
 const Footer = () => {
     const classes=useStyles()
@@ -22,11 +23,11 @@ const Footer = () => {
             <Grid item sm={12} xs={12} md={3} className={classes.containerLink}>
             <Typography variant='h5' align='center' gutterBottom className={classes.titre}> Informations légales  </Typography>
             <Box className={classes.linkContainer}>
-                  <Link to='/' className={classes.links}>Qui sommes nous</Link>
-                  <Link to='/' className={classes.links}>Mentions légales</Link>
-                  <Link to='/' className={classes.links}>Conditions générales</Link>
-                  <Link to='/' className={classes.links}>Protection des données</Link>
-                  <Link to='/' className={classes.links}>Contact</Link>
+                  <a href={pdf} target={'_blank'}  className={classes.links}>Qui sommes nous</a>
+                  <a href={pdf} className={classes.links}>Mentions légales</a>
+                  <a href={pdf} className={classes.links}>Conditions générales</a>
+                  <a href={pdf} className={classes.links}>Protection des données</a>
+                  <Link to='/contact' className={classes.links}>Contact</Link>
               </Box>
             </Grid>
             <Grid item sm={12} xs={12} md={3} className={classes.containerLink}>

@@ -11,7 +11,7 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 const PostCategory = () => {
-  const categorie=useSelector(state=>state.categorie)
+  const {categories}=useSelector(state=>state.categorie)
   const {token}=useSelector(state=>state.user)
     const classes=useStyles()
     const [error] = useState()
@@ -49,7 +49,7 @@ const PostCategory = () => {
            >
             <Form noValidate autoComplete='off' className={classes.root} >
              {
-                   categorie.map(item=><Typography key={item.id} variant='h5' style={{color:'#91ff35',fontStyle:'italic'}} align='center'> {item.message} </Typography>)
+                   categories?.map(item=><Typography key={item.id} variant='h5' style={{color:'#91ff35',fontStyle:'italic'}} align='center'> {item.message} </Typography>)
                }
             <div>
              <TextInput 

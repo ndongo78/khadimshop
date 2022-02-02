@@ -5,6 +5,7 @@ import article from './ReducerArticle'
 import newArticle from './ReducerNewArticle'
 import cart from '../reducers/ReducerCart'
 import commande from '../reducers/ReducerCommande'
+import favorite from './favoriteReducer'
 
 export default combineReducers({
     user,
@@ -12,5 +13,6 @@ export default combineReducers({
     article,
     newArticle,
     cart,
-    commande
+    commande,
+    favorite
 })
