@@ -1,6 +1,6 @@
 import axios from 'axios'
-//const url='https://backendkashop.herokuapp.com/'
-const url='http://localhost:5000/'
+const url='https://backendkashop.herokuapp.com/'
+//const url='http://localhost:5000/'
 //users debut
 //create user
 export const postUser=user=>axios.post(url+'users/register',user)
