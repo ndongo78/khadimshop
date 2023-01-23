@@ -29,6 +29,7 @@ import Categories from './admin/Categories';
 import UpdateCategorie from './admin/UpdateCategorie';
 
 const App=()=> {
+  console.log('from process',process.env.REACT_APP_API_URL)
   return (
     <>
     <CssBaseline />
