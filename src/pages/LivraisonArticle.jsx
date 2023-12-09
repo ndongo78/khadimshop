@@ -1,6 +1,8 @@
 import React from 'react'
 import {  Grid, Typography } from '@material-ui/core'
-import {AiFillCreditCard,IoAirplane,MdHeadsetMic} from 'react-icons/all'
+import {MdHeadsetMic} from 'react-icons/md'
+import {AiFillCreditCard} from 'react-icons/ai'
+import {IoAirplane} from'react-icons/io5'
 import { useStyles } from '../Styles/ComponentsStyle'
 
 const LivraisonArticle = () => {

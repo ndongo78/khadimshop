@@ -20,7 +20,7 @@ export default (state={articles:[],cart:[],newArticles:[],updatedArticle:[], tot
       case 'GET_ARTICLE_BY_ID':
             return{
                 ...state,
-                detail:action.payload
+                detail:[action.payload]
             }
 
        case 'GET_POPULAR_ARTICLES':

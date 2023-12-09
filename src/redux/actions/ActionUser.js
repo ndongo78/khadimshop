@@ -118,12 +118,13 @@ export const loginUser=(values)=>async(dispatch)=>{
         
     
     } catch (error) {
-        if(error.response){
-            dispatch({
-                type:LOGIN_ERROR,
-                payload:error.response.data
-            })
-        }
+        console.log("Failed to login", error);
+        // if(error.response){
+        //     dispatch({
+        //         type:LOGIN_ERROR,
+        //         payload:error.response.data
+        //     })
+        // }
         
     }
 }

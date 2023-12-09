@@ -3,7 +3,7 @@ import {Box, Container, Grid, Typography} from "@material-ui/core"
 import { useStyles } from './FooterStyle'
 import { Link } from 'react-router-dom'
 import { Copyright, LocationCity, Mail, Phone, Room } from '@material-ui/icons'
-import {FaFacebookF,FaInstagram,FaWhatsapp} from 'react-icons/all'
+import {FaFacebookF,FaInstagram,FaWhatsapp} from 'react-icons/fa'
 import pdf from '../docs/conditions.pdf'
 
 const Footer = () => {
